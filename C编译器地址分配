@@ -1,10 +1,19 @@
 void var_address_research();
+void struct_address();
+
+struct BaseType {
+    int i;
+    long ii;
+    float j;
+    double jj;
+}
 
 int main(void) {
 var_address_research();
 return 0;
 }
 
+// 函数内声明的变量一般分配连续的地址
 void var_address_research() {
 int a = 1;
 int b = 2;
@@ -17,4 +26,9 @@ long g = 6L;
 printf("%p %p %p \n", &a, &b, &c);
 
 printf("%p %p %p \n", &e, &f, &g);
+}
+
+// 结构字段的地址分配
+void struct_address() {
+
 }
