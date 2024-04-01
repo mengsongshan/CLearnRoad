@@ -37,3 +37,15 @@ printf("%p %p %p \n", &e, &f, &g);
 void struct_address() {
 
 }
+
+// 变量没有初始化时，直接使用拿到的一般是个脏值，变量初始化是最优的编程习惯
+void variable_not_init() {
+int i;
+printf("%p \n", &i);
+}
+
+// C中数组越界不报错，他返回的是个脏值，会造成程序莫名的行为，数组越界检查是个好的编程习惯
+void array_out_of_bound() {
+int i[100] = {0};
+printf("array out of bound: %d, %d \n", i[0], i[1001]);
+}
