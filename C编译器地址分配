@@ -1,0 +1,20 @@
+void var_address_research();
+
+int main(void) {
+var_address_research();
+return 0;
+}
+
+void var_address_research() {
+int a = 1;
+int b = 2;
+int c = 3;
+
+long e = 4L;
+long f = 5L;
+long g = 6L;
+
+printf("%p %p %p \n", &a, &b, &c);
+
+printf("%p %p %p \n", &e, &f, &g);
+}
