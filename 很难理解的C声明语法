@@ -1,13 +1,19 @@
-
-typedef void (*ngx_event_handler_pt)(ngx_event_t *ev);
-typedef void (*ngx_connection_handler_pt)(ngx_connection_t *c);
-
+-- 将函数指针定义为一个类型
+typedef void (*ngx_event_handler_pt)(ngx_event_t *ev);  // 定义一个函数指针，该指针指向的函数的返回类型为void，参数为ngx_event_t
+struct ngx_event_s {
+    void            *data;
+    unsigned         write:1;
+    unsigned         accept:1;
+    ngx_event_handler_pt  handler; // 声明一个函数指针类型的变量
+}
+------------------不得不感叹C的灵活, 一切皆可定义为类型, 灵活带来了高门槛------------------------
 
 typedef struct {
     size_t      len;
     u_char     *data;
 } ngx_str_t;
 
+// 宏替换
 #define ngx_string(str)     { sizeof(str) - 1, (u_char *) str }
 
 #define ngx_str_set(str, text)                                               \
@@ -15,9 +21,9 @@ typedef struct {
 #define ngx_str_null(str)   (str)->len = 0; (str)->data = NULL
 
 
-
+// 结构中可以包含 函数指针变量
 typedef struct {
-  ngx_int_t  (*add)(ngx_event_t *ev, ngx_int_t event, ngx_uint_t flags);
+  ngx_int_t  (*add)(ngx_event_t *ev, ngx_int_t event, ngx_uint_t flags);  // 定义函数指针变量add， 其返回类型为ngx_int_t，参数为ngx_event_t *ev, ngx_int_t event, ngx_uint_t flags
   ngx_int_t  (*del)(ngx_event_t *ev, ngx_int_t event, ngx_uint_t flags);
 
   ngx_int_t  (*enable)(ngx_event_t *ev, ngx_int_t event, ngx_uint_t flags);
